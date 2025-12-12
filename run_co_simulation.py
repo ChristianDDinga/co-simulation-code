@@ -23,3 +23,4 @@ controller_model = Model(partial(controller_function, controller_settings=contro
 models = [electric_grid_model, heat_pump_model, room_model, controller_model]
 manager = Manager(models, settings_configs["config 1"])
 manager.run_simulation()
+

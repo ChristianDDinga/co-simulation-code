@@ -124,7 +124,7 @@ def prepare_power_flow_data(
 
 def calculate_reactive_power_from_active_power(active_power, power_factor: float =0.95) -> float:
     """Calculate reactive power from active power using a power factor assumed to be 0.95."""
-    return -1 *active_power * np.tan(np.arccos(power_factor))
+    return -1 * active_power * np.tan(np.arccos(power_factor))
 
 
 def process_active_power_data_frame(active_power_df: pd.DataFrame) -> pd.DataFrame:
