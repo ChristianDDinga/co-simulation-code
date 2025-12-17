@@ -57,47 +57,52 @@ def main() -> None:
     # Combine: net_load = consumption + EV - PV
     customer_cols = [c for c in cons_df.columns if c != "date"]
 
-    combined = pd.DataFrame({"date": cons_df["date"]})
-    combined[customer_cols] = cons_df[customer_cols].to_numpy() + ev_df[customer_cols].to_numpy() - pv_df[customer_cols].to_numpy()
+    combined = pd.DataFrame({"snapshots": cons_df["date"]})
 
-    # Save to CSV
+    customer_cols = [c for c in cons_df.columns if c != "date"]
+    combined[customer_cols] = (
+        cons_df[customer_cols].to_numpy()
+        + ev_df[customer_cols].to_numpy()
+        - pv_df[customer_cols].to_numpy()
+    )
+
     out_path = Path("data/combined_profiles_one_year.csv")
-    combined.to_csv(out_path, index=False)
-
+    combined.to_csv(out_path, index=False)   
     print("Saved:", out_path)
 
+
     # Plot summaries
-    from profile_generator.plots import (
-    plot_all_customers_timeseries,
-    plot_random_customer_three_profiles,
-)
+#     from profile_generator.plots import (
+#     plot_all_customers_timeseries,
+#     plot_random_customer_three_profiles,
+# )
 
-# PV: all customers together
-    plot_all_customers_timeseries(
-        pv_df,
-        title="PV profiles (all customers)",
-        ylabel="PV generation (kW)",
-    )
+# # PV: all customers together
+#     plot_all_customers_timeseries(
+#         pv_df,
+#         title="PV profiles (all customers)",
+#         ylabel="PV generation (kW)",
+#     )
 
-    # EV: all customers together
-    plot_all_customers_timeseries(
-        ev_df,
-        title="EV profiles (all customers)",
-        ylabel="EV charging (kW)",
-    )
+#     # EV: all customers together
+#     plot_all_customers_timeseries(
+#         ev_df,
+#         title="EV profiles (all customers)",
+#         ylabel="EV charging (kW)",
+#     )
 
-    # Consumption: all customers together
-    plot_all_customers_timeseries(
-        cons_df,
-        title="Consumption profiles (all customers)",
-        ylabel="Consumption (kW)",
-    )
+#     # Consumption: all customers together
+#     plot_all_customers_timeseries(
+#         cons_df,
+#         title="Consumption profiles (all customers)",
+#         ylabel="Consumption (kW)",
+#     )
 
-    # One random customer: PV + EV + consumption together
-    plot_random_customer_three_profiles(
-        pv_df=pv_df,
-        ev_df=ev_df,
-        cons_df=cons_df,
-        customer_index_1based=None,   # random each run
-    )
+#     # One random customer: PV + EV + consumption together
+#     plot_random_customer_three_profiles(
+#         pv_df=pv_df,
+#         ev_df=ev_df,
+#         cons_df=cons_df,
+#         customer_index_1based=None,   # random each run
+#     )
 
