@@ -131,7 +131,7 @@ def process_active_power_data_frame(active_power_df: pd.DataFrame) -> pd.DataFra
     """Convert active power values from kW to W and rename columns."""
     active_power_df = active_power_df * 1e3
     active_power_df.columns = active_power_df.columns.str.replace(" (kW)", "")
-    return active_power_df
+    return 5*active_power_df
 
 
 # Run script as standalone with no interaction between the models ...
