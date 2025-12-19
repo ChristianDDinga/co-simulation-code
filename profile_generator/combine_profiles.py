@@ -6,6 +6,11 @@ from profile_generator.config_loader import load_profile_config
 from profile_generator.pv_profile_generator import PvProfileGenerator
 from profile_generator.ev_profile_generator import EvProfileGenerator
 from profile_generator.consumption_profile_generator import ConsumptionProfileGenerator
+from profile_generator.plots import (
+    plot_all_customers_timeseries,
+    plot_random_day_all_customers,
+)
+
 
 def main() -> None:
     cfg = load_profile_config("configurations/profile_generator_config.yml")
@@ -71,17 +76,14 @@ def main() -> None:
     print("Saved:", out_path)
 
 
-    # Plot summaries
-#     from profile_generator.plots import (
-#     plot_all_customers_timeseries,
-#     plot_random_customer_three_profiles,
-# )
-
+# # Plot summaries
+   
 # # PV: all customers together
 #     plot_all_customers_timeseries(
 #         pv_df,
 #         title="PV profiles (all customers)",
 #         ylabel="PV generation (kW)",
+#         out_path="pv_all_customers.png"  
 #     )
 
 #     # EV: all customers together
@@ -89,6 +91,7 @@ def main() -> None:
 #         ev_df,
 #         title="EV profiles (all customers)",
 #         ylabel="EV charging (kW)",
+#         out_path="ev_all_customers.png"  
 #     )
 
 #     # Consumption: all customers together
@@ -96,13 +99,13 @@ def main() -> None:
 #         cons_df,
 #         title="Consumption profiles (all customers)",
 #         ylabel="Consumption (kW)",
+#         out_path="consumption_all_customers.png"  
 #     )
+    
+    # plot_random_day_all_customers(
+    #     pv_df, ev_df, cons_df, 
+    #     day="2020-01-15",
+    #     out_dir="combined_daily_profiles_specific_day")
 
-#     # One random customer: PV + EV + consumption together
-#     plot_random_customer_three_profiles(
-#         pv_df=pv_df,
-#         ev_df=ev_df,
-#         cons_df=cons_df,
-#         customer_index_1based=None,   # random each run
-#     )
-
+   
+    
