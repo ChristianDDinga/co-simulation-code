@@ -22,23 +22,27 @@ def controller_function(
     print(f"Current grid voltage: {voltage}")
     print(f"Current temperature: {temperature}")
 
-    # Priority 1: Adjust power based on voltage limits
-    if voltage < voltage_min:
-        power_set_point_hp -= p_adjust_step_size_voltage
-        print(f"Voltage {voltage} too low, decreasing heat pump power setpoint (consumption) to correct voltage.")
-    elif voltage > voltage_max:
-        power_set_point_hp += p_adjust_step_size_voltage
-        print(f"Voltage {voltage} too high, increasing heat pump power setpoint (consumption) to correct voltage.")
-    else:
-        print()
-
-    # Priority 2: Adjust power based on temperature needs (only if voltage is within limits)
+    # Temperature control: Turn on or off the heat pump based on temperature needs (when the voltage is within limits)
     if voltage_min <= voltage <= voltage_max:
         if temperature > temp_max:
-            power_set_point_hp -= p_adjust_step_size_temp
-            print("Temperature is too high, reducing heat pump power setpoint of heatpump to cool down.")
+            power_set_point_hp = 0
+            print("Temperature is too high, turn off the heat pump to cool down.")
         elif temperature < temp_min:
-            power_set_point_hp += p_adjust_step_size_temp
-            print("Temperature is too low, increasing heat pump power setpoint of heatpump to warm up.")
+            power_set_point_hp = p_adjust_step_size_temp
+            print("Temperature is too low, turn on the heat pump to warm up.")
+
+    # Voltage control: Turn on or off the heat pump based on voltage limits (Voltage control has higher priority when the temperature is low)
+    elif voltage < voltage_min:
+        power_set_point_hp = 0
+        print(f"Voltage {voltage} too low, turn off the heat pump to correct voltage.")
+    elif voltage > voltage_max:
+        if temperature < temp_max:
+            power_set_point_hp = p_adjust_step_size_voltage
+            print(f"Voltage {voltage} too high, turn on the heat pump to correct voltage.")
+        else:
+            power_set_point_hp = 0
+            print(f"Although the voltage {voltage} too high and we need to turn on the heat pump, but temperature {temperature} is too high, the heat pump has to be turned off.")
+    else:
+        print()
 
     return power_set_point_hp
