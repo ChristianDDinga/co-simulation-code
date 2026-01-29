@@ -11,7 +11,7 @@ from profile_generator.plots import (
 )
 
 
-def main() -> None:
+def main(scenario_name: str) -> None:
     cfg = load_profile_config("configurations/profile_generator_config.yml")
 
     pv_cfg = cfg["pv_profile_generator"]
@@ -70,7 +70,7 @@ def main() -> None:
         - pv_df[customer_cols].to_numpy()
     )
 
-    out_path = Path("data/combined_profiles_one_year.csv")
+    out_path = Path(f"data/combined_profiles_one_year_{scenario_name}.csv")
     combined.to_csv(out_path, index=False)   
     print("Saved:", out_path)
 
@@ -82,7 +82,7 @@ def main() -> None:
 #         pv_df,
 #         title="PV profiles (all customers)",
 #         ylabel="PV generation (kW)",
-#         out_path="pv_all_customers.png"  
+#         out_path=f"pv_all_customers_{scenario_name}.png"  
 #     )
 
 #     # EV: all customers together
@@ -90,7 +90,7 @@ def main() -> None:
 #         ev_df,
 #         title="EV profiles (all customers)",
 #         ylabel="EV charging (kW)",
-#         out_path="ev_all_customers.png"  
+#         out_path=f"ev_all_customers_{scenario_name}.png"  
 #     )
 
 #     # Consumption: all customers together
@@ -98,7 +98,7 @@ def main() -> None:
 #         cons_df,
 #         title="Consumption profiles (all customers)",
 #         ylabel="Consumption (kW)",
-#         out_path="consumption_all_customers.png"  
+#         out_path=f"consumption_all_customers_{scenario_name}.png"  
 #     )
     
     # plot_random_day_all_customers(
