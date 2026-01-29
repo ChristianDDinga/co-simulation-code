@@ -1,4 +1,3 @@
-# profile_generator/combine_profiles.py
 from __future__ import annotations
 from pathlib import Path
 import pandas as pd
@@ -55,7 +54,7 @@ def main() -> None:
 
     cons_df = cons_gen.sample_consumption()
 
-    # Align by date (safety)
+    # Align by date 
     assert cons_df["date"].equals(ev_df["date"])
     assert cons_df["date"].equals(pv_df["date"])
 

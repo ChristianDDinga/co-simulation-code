@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 import pandas as pd
 import numpy as np
@@ -20,7 +19,7 @@ class EvProfileGenerator:
         base_df = pd.read_csv(csv_path, parse_dates=["date"])
         self.timestamps = base_df["date"].reset_index(drop=True)
 
-        # assume all other columns are customers
+       
         customer_cols = [c for c in base_df.columns if c != "date"]
         if len(customer_cols) != n_customers:
             raise ValueError(f"Expected {n_customers} customer columns, got {len(customer_cols)}")
@@ -40,7 +39,7 @@ class EvProfileGenerator:
         mat = np.zeros_like(self.base_mat)
         mat[:, ev_idx] = self.base_mat[:, ev_idx]
 
-        # multiplicative Gaussian noise: x * (1 + eps)
+        
         eps = self.rng.normal(0.0, self.noise_std_frac, size=mat.shape)
         mat_noisy = mat * (1.0 + eps)
 

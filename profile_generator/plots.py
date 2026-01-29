@@ -22,10 +22,10 @@ def _drop_tz(s: pd.Series) -> pd.Series:
     Make a datetime Series timezone-naive.
     Works for both tz-aware and tz-naive datetimes.
     """
-    # If tz-aware -> convert to naive
+    
     if getattr(s.dt, "tz", None) is not None:
         return s.dt.tz_convert(None)
-    # If tz-naive -> keep as-is
+    
     return s
 
 
@@ -68,17 +68,17 @@ def plot_random_day_all_customers(
     linewidth: float = 0.7,
     out_dir: str | None = None,
 ):
-    # --- prepare data ---
+   
     pv_df = _ensure_dt_index(pv_df)
     ev_df = _ensure_dt_index(ev_df)
     cons_df = _ensure_dt_index(cons_df)
 
-    # remove timezone if present (robust)
+   
     pv_df["date"] = _drop_tz(pv_df["date"])
     ev_df["date"] = _drop_tz(ev_df["date"])
     cons_df["date"] = _drop_tz(cons_df["date"])
 
-    # --- choose day ---
+    
     if day is None:
         available_days = cons_df["date"].dt.normalize().unique()
         day = pd.Timestamp(np.random.choice(available_days))
@@ -88,7 +88,7 @@ def plot_random_day_all_customers(
     start = day
     end = day + pd.Timedelta(days=1)
 
-    # --- slice one day ---
+   
     pv_day = pv_df[(pv_df["date"] >= start) & (pv_df["date"] < end)]
     ev_day = ev_df[(ev_df["date"] >= start) & (ev_df["date"] < end)]
     cons_day = cons_df[(cons_df["date"] >= start) & (cons_df["date"] < end)]
@@ -96,10 +96,10 @@ def plot_random_day_all_customers(
     if pv_day.empty or ev_day.empty or cons_day.empty:
         raise ValueError(f"No data found for day {day.date()}")
 
-    # --- customer columns ---
+   
     cust_cols = _customer_cols(cons_day)
 
-    # --- plotting helper ---
+    
     def _plot(df_day: pd.DataFrame, title: str, filename: str | None):
         t = df_day["date"]
 
