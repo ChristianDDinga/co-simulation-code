@@ -62,7 +62,7 @@ class Manager:
 
         print("===============================================================")
         print(f"Starting simulation at time {start_time}, ending at {end_time}, with time step delta_t: {delta_t}\n")
-        print(f"Initial heat pump power_setpoint: {hp_power_setpoint}\nInitial heat pump temperature: {room_temperature}\n")
+        print(f"Initial heat pump power_setpoint [W]: {hp_power_setpoint}\nInitial heat pump temperature [°C]: {room_temperature}\n")
         print("===============================================================")
 
         time_steps = int((end_time - start_time) / delta_t)
@@ -110,8 +110,8 @@ class Manager:
         plots = [
             (axs[0, 0], times, voltages, "Voltage Over Time", "Time [min]", "Voltage [V]", 'blue'),
             (axs[0, 1], times, temperatures, "Temperature Over Time", "Time [min]", "Temperature [°C]", 'red'),
-            (axs[1, 0], times, power_setpoints, "Heat Pump Power Setpoint Over Time", "Time [min]", "Power Setpoint [kW]", 'green'),
-            (axs[1, 1], times, heat_productions, "Heat Production Over Time", "Time [min]", "Heat Production [kW]", 'orange'),
+            (axs[1, 0], times, power_setpoints, "Heat Pump Power Setpoint Over Time", "Time [min]", "Power Setpoint [W]", 'green'),
+            (axs[1, 1], times, heat_productions, "Heat Production Over Time", "Time [min]", "Heat Production [W]", 'orange'),
         ]
 
         for ax, x, y, title, xlabel, ylabel, color in plots:

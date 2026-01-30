@@ -8,9 +8,9 @@ InitializationSettings:
   grid_topology: data/grid_topology.csv
   initial_conditions:
     heat_pump:
-      power_set_point: 100
+      power_set_point: 0 # Initial power setpoint [W]
     room:
-      temperature: 15  # Initial temperature in the room.
-      outside_temperature: 15  # Temperature outside the room.
-      thermal_capacitance: 5000  # Represents how much heat is needed for a 1°C temperature increase.
-      thermal_resistance: 0.01  # Represents how well the room is insulated (higher R = better insulation).
+      temperature: 20  # Initial temperature in the room.
+      outside_temperature: 12   # Temperature outside the room.
+      thermal_capacitance: 10000 # Represents how much heat is needed for a 1°C temperature increase.
+      thermal_resistance: 0.05  # Represents how well the room is insulated (higher R = better insulation).
