@@ -9,7 +9,7 @@ profilegenerator_config:
 
   ev_profile_generator:
     csv_path: "data/ev_one_year_15min.csv"
-    n_customers: 95
+    n_customers: 95     # total number customers
     n_ev_customers: 95
     noise_ev: 0.05
     random_state: null
