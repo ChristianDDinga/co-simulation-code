@@ -133,16 +133,3 @@ def process_active_power_data_frame(active_power_df: pd.DataFrame) -> pd.DataFra
     return active_power_df   
 
 
-# Run script as standalone with no interaction between the models ...
-
-if __name__ == "__main__":
-    import pandas as pd
-
-    # load the csv file 
-
-    active_power_df = pd.read_csv("data/consumption_one_year_15min.csv", index_col="date", parse_dates=True)
-    grid_topology_df = pd.read_csv("data/grid_topology.csv")
-    time_step = active_power_df.index[0]
-    for time_step in active_power_df.index:
-        consumer_voltage_dict = run_power_flow(grid_topology_df, active_power_df, time_step)
-        print(f"Time step: {time_step}, Voltages: {consumer_voltage_dict}")
