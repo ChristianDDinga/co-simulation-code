@@ -55,8 +55,7 @@ def update_active_power_data_frame_with_smart_consumer_power_setpoint(
 def run_power_flow(
     grid_topology_df: pd.DataFrame,
     active_power_df: pd.DataFrame,
-    time_step: pd.DatetimeIndex,
-) -> dict[str, float]:
+    time_step: pd.DatetimeIndex,) -> dict[str, float]:
     """Run the power flow for a given time step."""
     # 1. Prepare power flow data
     input_data = prepare_power_flow_data(grid_topology_df, active_power_df, time_step)
@@ -96,7 +95,7 @@ def prepare_power_flow_data(
     # Initialize node data
     node = initialize_array(DatasetType.input, ComponentType.node, 95)
     node["id"] = np.arange(1, 96)
-    node["u_rated"] = [0.4e3] * 95  # Rated voltage (230V)
+    node["u_rated"] = [0.4e3] * 95  # Rated line-line voltage
 
     # Initialize source (slack Node)
     source = initialize_array(DatasetType.input, ComponentType.source, 1)
@@ -131,7 +130,6 @@ def process_active_power_data_frame(active_power_df: pd.DataFrame) -> pd.DataFra
     """Convert active power values from kW to W and rename columns."""
     active_power_df = active_power_df * 1e3
     active_power_df.columns = active_power_df.columns.str.replace(" (kW)", "")
-    return active_power_df
+    return active_power_df   
 
 
-# Run script as standalone with no interaction between the models ...

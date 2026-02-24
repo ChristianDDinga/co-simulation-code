@@ -1,3 +1,4 @@
+*.csv
 *.png
 *.log
 *.sqlite
@@ -38,3 +39,6 @@ venv
 venv3
 .venv
 .python-version
+
+# remove discussion.md files
+discussion.md

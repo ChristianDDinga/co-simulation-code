@@ -47,7 +47,8 @@ class Manager:
         passive_consumer_power_setpoints = pd.read_csv(
             config['InitializationSettings']['passive_consumers_power_setpoints'], index_col="snapshots", parse_dates=True,
         )
-
+        print(passive_consumer_power_setpoints.shape)
+        print(passive_consumer_power_setpoints.columns)
         # Smart consumer
         hp_power_setpoint = config['InitializationSettings']['initial_conditions']['heat_pump']['power_set_point']
         room_temperature = config['InitializationSettings']['initial_conditions']['room']['temperature']

@@ -1,0 +1,21 @@
+profilegenerator_config:
+  pv_profile_generator:
+    csv_path: "data/irradiance_one_year_15min.csv"
+    n_customers: 95      # total number of customers
+    n_pv_customers: 95   # number of customers with PV systems
+    pv_size_kwp: 10.0    # size of each customer's PV system in kWp
+    noise_pv: 0.07       # noise level for PV profiles
+    random_state: 42     # set it fixed for reproducibility
+
+  ev_profile_generator:
+    csv_path: "data/ev_one_year_15min.csv"
+    n_customers: 95    
+    n_ev_customers: 95
+    noise_ev: 0.05
+    random_state: 42
+
+  consumption_profile_generator:
+    csv_path: "data/consumption_one_year_15min.csv"
+    n_customers: 95
+    noise_consumption: 0.02
+    random_state: 42
