@@ -87,11 +87,11 @@ def prepare_power_flow_data(
     line["to_node"] = grid_topology_df["TO"].values
     line["from_status"] = np.ones(num_lines)
     line["to_status"] = np.ones(num_lines)
-    line["r1"] = grid_topology_df["Raa"].values
-    line["x1"] = grid_topology_df["Xaa"].values
+    line["r1"] = grid_topology_df["Raa (Ω)"].values
+    line["x1"] = grid_topology_df["Xaa (Ω)"].values
     line["c1"] = np.full(num_lines, 10e-6)
     line["tan1"] = np.zeros(num_lines)
-    line["i_n"] = grid_topology_df["Imax"].values
+    line["i_n"] = grid_topology_df["Imax (A)"].values
 
     # Initialize node data
     node = initialize_array(DatasetType.input, ComponentType.node, 95)
